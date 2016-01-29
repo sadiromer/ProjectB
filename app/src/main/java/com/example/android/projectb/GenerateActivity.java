@@ -65,6 +65,12 @@ public class GenerateActivity extends AppCompatActivity {
                 TextView displayView = (TextView) findViewById(R.id.base64text);
                 displayView.setMovementMethod(new ScrollingMovementMethod());
                 displayView.setText(String.valueOf(Base64));
+
+                //Getting the length of the string and displaying it
+                int length = Base64.length();
+                TextView displayView2 = (TextView) findViewById(R.id.base64details);
+                displayView2.setText(String.valueOf(length));
+
             }
             catch (Exception e) {
                 e.printStackTrace();
