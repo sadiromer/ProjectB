@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GenerateActivity"></activity>
+        <activity android:name=".GenerateActivity" />
+        <activity android:name=".ScanActivity"></activity>
     </application>
 
 </manifest>
