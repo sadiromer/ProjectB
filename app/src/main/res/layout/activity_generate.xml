@@ -19,6 +19,12 @@
         android:text="Browse"
         android:id="@+id/browseButton"
         android:onClick="browseButton"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Browse Decode"
+        android:id="@+id/browseDecodeButton"
+        android:onClick="browseDecodeButton"/>
 
     <ImageView
         android:layout_width="match_parent"

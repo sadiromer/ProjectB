@@ -1,7 +1,7 @@
 package com.example.android.projectb;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class ScanActivity extends AppCompatActivity {
 
@@ -10,6 +10,4 @@ public class ScanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
     }
-    
-
 }

@@ -28,7 +28,7 @@
         android:textSize="18dp"
         android:gravity="center"
         android:text="Scan"
-        android:onClick="scanQRButton"/>
+        android:onClick="scanButton"/>
 
     <Button
         android:id="@+id/generateButton"

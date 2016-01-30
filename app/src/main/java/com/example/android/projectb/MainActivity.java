@@ -28,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void scanButton (View v) {
+        Intent intent2 = new Intent(MainActivity.this, ScanActivity.class);
+        startActivity(intent2);
+    }
 
 } //MainActivity
 
