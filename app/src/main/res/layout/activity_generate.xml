@@ -16,42 +16,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Browse"
-        android:id="@+id/browseButton"
-        android:onClick="browseButton"/>
+        android:text="Image"
+        android:id="@+id/ImageDecodeButton"
+        android:onClick="ImageDecodeButton"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Browse Decode"
-        android:id="@+id/browseDecodeButton"
-        android:onClick="browseDecodeButton"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="300sp"
-        android:layout_gravity="center_horizontal"
-        android:background="#E0E0E0"
-        android:id="@+id/image_holder"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Length of the converted String:"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/base64details" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Code converted to base64: "/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/base64text" />
-
+        android:text="File"
+        android:id="@+id/FileDecodeButton"
+        android:onClick="FileDecodeButton"/>
 
 </LinearLayout>

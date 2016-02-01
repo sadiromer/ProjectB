@@ -16,7 +16,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".GenerateActivity" />
-        <activity android:name=".ScanActivity"></activity>
+        <activity android:name=".ScanActivity" />
+        <activity android:name=".GenerateImageActivity" />
+        <activity android:name=".GenerateFileActivity"></activity>
     </application>
 
 </manifest>
