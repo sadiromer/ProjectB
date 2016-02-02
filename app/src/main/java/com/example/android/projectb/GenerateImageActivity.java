@@ -6,8 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
 import android.util.Log;
@@ -23,7 +23,9 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 public class GenerateImageActivity extends AppCompatActivity {
@@ -87,11 +89,11 @@ public class GenerateImageActivity extends AppCompatActivity {
                 QRCodeWriter writer = new QRCodeWriter();
 
                 //starting on the for loop
-                //for (int i = 0; i < bitmapArray.size(); i++)
-                for (int i = 0; i < numberOfPartsSplit; i++)
-                {
-                    // in your code change Base64Parts[0] to Base64Parts[i]
-                    // also make sure you use 'i' in the filename of your output imag
+               // for (int i = 0; i < numberOfPartsSplit; i++)
+                //{
+                ArrayList<Bitmap> bmp_images = new ArrayList<Bitmap>();
+                for (int i = 0; i < numberOfPartsSplit; i++){
+
                     try {
                         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
                         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
@@ -104,12 +106,33 @@ public class GenerateImageActivity extends AppCompatActivity {
                                 bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                             }
                         }
-                        ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp);
+
+                        bmp_images.add(bmp); //the code added for arraylist of images
+                        ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp_images.get(0));
+
 
                     } catch (WriterException e) {
                         e.printStackTrace();
                     }
-            }
+            }//forloop
+
+                //Working on generating a GIF
+
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    AnimatedGifEncoder encoder = new AnimatedGifEncoder();
+                    encoder.start(bos);
+                for (int j = 0; j < numberOfPartsSplit; j++) {
+                    encoder.addFrame(bmp_images.get(j));
+                }
+                    encoder.finish();
+
+                    FileOutputStream outStream = null;
+                    outStream = new FileOutputStream("/sdcard1/generate_gif/test.gif");
+                    outStream.write(bos.toByteArray());
+                    outStream.close();
+
+
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -123,7 +146,7 @@ public class GenerateImageActivity extends AppCompatActivity {
                 }
             }
 
-        }
+        }//if as requested from button
     }//onActivityResult
 
     //The following is to encode the the image to Base64
