@@ -62,7 +62,8 @@ public class GenerateImageActivity extends AppCompatActivity {
                 String Base64 = encodeTobase64(original);
 
                 //Splitting the base64 strings into parts
-                String Base64Parts[] = splitInParts(Base64, 1000);
+                int splitStringLength = 1000;
+                String Base64Parts[] = splitInParts(Base64, splitStringLength);
 
                 //Set it in textview
                 TextView displayView = (TextView) findViewById(R.id.base64text);
@@ -72,6 +73,10 @@ public class GenerateImageActivity extends AppCompatActivity {
 
                 //Getting the length of the string and displaying it
                 int length = Base64.length();
+
+                //Total number of parts being splitted into
+                int numberOfPartsSplit = (length % splitStringLength + 1);
+
                 //int length = Base64Parts[1].length();
                 TextView displayView2 = (TextView) findViewById(R.id.base64details);
                 displayView2.setText(String.valueOf(length));
@@ -80,27 +85,31 @@ public class GenerateImageActivity extends AppCompatActivity {
                 //Generate QR code
 
                 QRCodeWriter writer = new QRCodeWriter();
-                // for (int i = 0; i < bitmapArray.size(); i++)
 
-
-                try {
-                    Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
-                    hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
-                    BitMatrix bitMatrix = writer.encode(Base64Parts[0], BarcodeFormat.QR_CODE, 512, 512,hintMap);
-                    int width = bitMatrix.getWidth();
-                    int height = bitMatrix.getHeight();
-                    Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-                    for (int x = 0; x < width; x++) {
-                        for (int y = 0; y < height; y++) {
-                            bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                //starting on the for loop
+                //for (int i = 0; i < bitmapArray.size(); i++)
+                for (int i = 0; i < numberOfPartsSplit; i++)
+                {
+                    // in your code change Base64Parts[0] to Base64Parts[i]
+                    // also make sure you use 'i' in the filename of your output imag
+                    try {
+                        Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
+                        hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+                        BitMatrix bitMatrix = writer.encode(Base64Parts[i], BarcodeFormat.QR_CODE, 512, 512, hintMap);
+                        int width = bitMatrix.getWidth();
+                        int height = bitMatrix.getHeight();
+                        Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                        for (int x = 0; x < width; x++) {
+                            for (int y = 0; y < height; y++) {
+                                bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                            }
                         }
+                        ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp);
+
+                    } catch (WriterException e) {
+                        e.printStackTrace();
                     }
-                    ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp);
-
-                } catch (WriterException e) {
-                    e.printStackTrace();
-                }
-
+            }
 
             } catch (Exception e) {
                 e.printStackTrace();

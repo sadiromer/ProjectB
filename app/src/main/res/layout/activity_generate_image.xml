@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Select File to be encoded:" />
+        android:text="Select Image to be encoded:" />
 
     <Button
         android:layout_width="match_parent"

@@ -1,0 +1,2 @@
+configurations.create("default")
+artifacts.add("default", file('qrgen-1.4-javadoc.jar'))
