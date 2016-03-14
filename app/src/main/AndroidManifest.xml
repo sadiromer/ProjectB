@@ -18,7 +18,8 @@
         <activity android:name=".GenerateActivity" />
         <activity android:name=".ScanActivity" />
         <activity android:name=".GenerateImageActivity" />
-        <activity android:name=".GenerateFileActivity"></activity>
+        <activity android:name=".GenerateFileActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

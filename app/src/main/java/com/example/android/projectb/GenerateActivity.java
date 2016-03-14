@@ -31,4 +31,9 @@ public class GenerateActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    public void TestButton (View v) {
+        Intent intent2 = new Intent(GenerateActivity.this, TestActivity.class);
+        startActivity(intent2);
+    }
+
 } //GenerateActivity

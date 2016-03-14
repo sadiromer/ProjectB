@@ -28,4 +28,12 @@
         android:id="@+id/FileDecodeButton"
         android:onClick="FileDecodeButton"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/TestButton"
+        android:onClick="TestButton"/>
+
 </LinearLayout>
