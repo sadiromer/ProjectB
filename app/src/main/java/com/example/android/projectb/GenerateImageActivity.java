@@ -51,35 +51,35 @@ public class GenerateImageActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        InputStream stream = null;
+        InputStream imageStream = null;
         if (requestCode == REQUEST_ID && resultCode == Activity.RESULT_OK) {
             try {
-                Uri uri = data.getData(); //path of the image file chosen
-                stream = getContentResolver().openInputStream(uri); //streams in the image
-                Bitmap original = BitmapFactory.decodeStream(stream); //converts the image to bitmap
+                Uri selectedImage = data.getData(); //path of the image file chosen
+                imageStream = getContentResolver().openInputStream(selectedImage); //streams in the image
+                Bitmap bmpImage = BitmapFactory.decodeStream(imageStream); //converts the image to bitmap
                 //((ImageView)findViewById(R.id.image_holder)).setImageBitmap(Bitmap.createScaledBitmap(original,
                 //original.getWidth() / HALF, original.getHeight() / HALF, true));
 
                 //adding me code to convert to base64
-                String Base64 = encodeTobase64(original);
+                String Base64 = encodeTobase64(bmpImage);
 
                 //Splitting the base64 strings into parts
-                int splitStringLength = 500; //Number of parts base64 is to be split
+                int splitStringLength = 1000; //Number of parts base64 is to be split
                 //String Base64Parts[] = splitInParts(Base64, splitStringLength); //Splitting it into parts
                 ArrayList<String> Base64Parts = splitEqually(Base64, splitStringLength);
 
                 //Set it in textview
                 TextView displayView = (TextView) findViewById(R.id.base64text);
                 displayView.setMovementMethod(new ScrollingMovementMethod());
-                displayView.setText(String.valueOf(Base64Parts.get(0)));
-                //displayView.setText(String.valueOf(Base64Parts[1]));
+                //displayView.setText(String.valueOf(Base64Parts.get(1)));
+                displayView.setText(String.valueOf(Base64));
 
 
                 //Getting the length of the string and displaying it
                 int length = Base64.length();
 
                 //Total number of parts being split into
-                int numberOfPartsSplit = (length % splitStringLength + 1);
+                int numberOfPartsSplit = (length / splitStringLength);
 
                 //int length = Base64Parts[1].length();
                 TextView displayView2 = (TextView) findViewById(R.id.base64details);
@@ -111,14 +111,21 @@ public class GenerateImageActivity extends AppCompatActivity {
                             }
                         }
 
-                        bmp_images.add(bmp); //the code added for arraylist of images
-                        ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp_images.get(0));
+                        bmp_images.add(i, bmp); //the code added for arraylist of images
+                        /*
+                        ImageView mImg;
+                        mImg = (ImageView) findViewById(R.id.image_holder);
+                        mImg.setImageBitmap(bmp_images.get(1));
+                        */
 
 
                     } catch (WriterException e) {
                         e.printStackTrace();
                     }
             }//forloop
+
+                ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp_images.get(3));
+
 
                 //Working on generating a GIF
 
@@ -142,9 +149,9 @@ public class GenerateImageActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            if (stream != null) {
+            if (imageStream != null) {
                 try {
-                    stream.close();
+                    imageStream.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
