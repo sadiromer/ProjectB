@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
@@ -23,8 +24,10 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -40,7 +43,7 @@ public class GenerateImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_generate_image);
     }
 
-//Using this to search only for Image Types
+    //Using this to search only for Image Types
     public void browseButton(View v) {
         Intent intentImage = new Intent();
         intentImage.setAction(Intent.ACTION_GET_CONTENT);
@@ -96,8 +99,7 @@ public class GenerateImageActivity extends AppCompatActivity {
 
                 //Declaring Array
                 ArrayList<Bitmap> bmp_images = new ArrayList<Bitmap>();
-                for (int i = 0; i < numberOfPartsSplit; i++){
-
+                for (int i = 0; i < numberOfPartsSplit; i++) {
                     try {
                         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
                         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
@@ -105,44 +107,49 @@ public class GenerateImageActivity extends AppCompatActivity {
                         int width = bitMatrix.getWidth();
                         int height = bitMatrix.getHeight();
                         Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+
+                        //Creating the bitmap matrix for QR code Image
                         for (int x = 0; x < width; x++) {
                             for (int y = 0; y < height; y++) {
                                 bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                             }
-                        }
+                        }//for loop to generate QR Code Bitmap
 
-                        bmp_images.add(i, bmp); //the code added for arraylist of images
-                        /*
-                        ImageView mImg;
-                        mImg = (ImageView) findViewById(R.id.image_holder);
-                        mImg.setImageBitmap(bmp_images.get(1));
-                        */
-
+                        //the code added for arraylist of images
+                        bmp_images.add(i, bmp);
 
                     } catch (WriterException e) {
                         e.printStackTrace();
                     }
-            }//forloop
+                }//forloop
 
+                //Generate ImageView of the QR code image generated
                 ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp_images.get(3));
 
 
-                //Working on generating a GIF
+                //Generating a GIF------------------------------------------------------------------
+                ByteArrayOutputStream byteOutStreamGIF = new ByteArrayOutputStream();
+                AnimatedGifEncoder encoderGIF = new AnimatedGifEncoder();
+                encoderGIF.start(byteOutStreamGIF);
 
-                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    AnimatedGifEncoder encoder = new AnimatedGifEncoder();
-                    encoder.start(bos);
                 for (int j = 0; j < numberOfPartsSplit; j++) {
-                    encoder.addFrame(bmp_images.get(j));
+                    encoderGIF.addFrame(bmp_images.get(j));
                 }
-                    encoder.finish();
+                encoderGIF.finish();
 
-                    FileOutputStream outStream = null;
-                    outStream = new FileOutputStream("/sdcard1/generate_gif/test.gif");
-                    outStream.write(bos.toByteArray());
-                    outStream.close();
-
-
+                OutputStream fOut = null;
+                try {
+                    File root = new File(Environment.getExternalStorageDirectory() + File.separator + "Capture" + File.separator);
+                    root.mkdirs();
+                    File sdImageMainDirectory = new File(root, "myPicName.gif");
+                    fOut = new FileOutputStream(sdImageMainDirectory);
+                    fOut.write(byteOutStreamGIF.toByteArray());
+                    fOut.flush();
+                    fOut.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //----------------------------------------------------------------------------------
 
 
             } catch (Exception e) {
@@ -160,8 +167,10 @@ public class GenerateImageActivity extends AppCompatActivity {
         }//if as requested from button
     }//onActivityResult
 
-    //The following is to encode the the image to Base64
 
+    //___________________________________FUNCTIONS USED_____________________________________________
+
+    //The following is to encode the the image to Base64
     public static String encodeTobase64(Bitmap image) {
         Bitmap immagex = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -173,12 +182,15 @@ public class GenerateImageActivity extends AppCompatActivity {
         return imageEncoded;
     }
 
+
     //The following is to decode. CAn use it in the decoding part
     public static Bitmap decodeBase64(String input) {
         byte[] decodedByte = Base64.decode(input, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
+
+    //Function to Split String
     public static ArrayList<String> splitEqually(String text, int size) {
         // Give the list the right capacity to start with. You could use an array
         // instead if you wanted.
@@ -190,36 +202,7 @@ public class GenerateImageActivity extends AppCompatActivity {
         return ret;
     }
 
-    /*
-    //Used to split strings
-    public String[] splitInParts(String s, int partLength) {
-        int len = s.length();
 
-        // Number of parts
-        int nparts = (len + partLength - 1) / partLength;
-        String parts[] = new String[nparts];
+    //___________________________________FUNCTIONS USED_____________________________________________
 
-        // Break into parts
-        int offset = 0;
-        int i = 0;
-        while (i < nparts) {
-            parts[i] = s.substring(offset, Math.min(offset + partLength, len));
-            offset += partLength;
-            i++;
-        }
-
-        return parts;
-    }
-*/
-
-    //
-    //
-    //
-    //
-    //
-
-
-    //
-    //
-    //
-}
+}//GenerateImageActivity
