@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -124,10 +127,10 @@ public class GenerateImageActivity extends AppCompatActivity {
                 }//forloop
 
                 //Generate ImageView of the QR code image generated
-                ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp_images.get(3));
+               // ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp_images.get(3));
 
 
-                //Generating a GIF------------------------------------------------------------------
+                //Generating a GIF file-------------------------------------------------------------
                 ByteArrayOutputStream byteOutStreamGIF = new ByteArrayOutputStream();
                 AnimatedGifEncoder encoderGIF = new AnimatedGifEncoder();
                 encoderGIF.start(byteOutStreamGIF);
@@ -138,19 +141,39 @@ public class GenerateImageActivity extends AppCompatActivity {
                 encoderGIF.finish();
 
                 OutputStream fOut = null;
+                Uri outputFileUri;
                 try {
                     File root = new File(Environment.getExternalStorageDirectory() + File.separator + "Capture" + File.separator);
                     root.mkdirs();
                     File sdImageMainDirectory = new File(root, "myPicName.gif");
+                    outputFileUri = Uri.fromFile(sdImageMainDirectory);
                     fOut = new FileOutputStream(sdImageMainDirectory);
                     fOut.write(byteOutStreamGIF.toByteArray());
                     fOut.flush();
                     fOut.close();
+
                 } catch (Exception e) {
                     e.printStackTrace();
+
                 }
                 //----------------------------------------------------------------------------------
 
+
+                //Generating GIF Animation----------------------------------------------------------
+                AnimationDrawable animDrawable = new AnimationDrawable();
+                Drawable startFrame = (BitmapDrawable)getResources().getDrawable(R.drawable.start_frame);
+                animDrawable.addFrame(startFrame, 250);
+
+                for (int k = 0; k < numberOfPartsSplit; k++) {
+                    Drawable frame = new BitmapDrawable(bmp_images.get(k));
+                    animDrawable.addFrame(frame, 250);
+                }
+
+
+                ImageView imageAnim = (ImageView) findViewById(R.id.image_holder);
+                imageAnim.setBackgroundDrawable(animDrawable);
+                animDrawable.start();
+                //----------------------------------------------------------------------------------
 
             } catch (Exception e) {
                 e.printStackTrace();

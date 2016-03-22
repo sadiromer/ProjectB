@@ -21,8 +21,9 @@
         android:onClick="browseButton"/>
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250sp"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:padding="0px"
         android:layout_gravity="center_horizontal"
         android:background="#E0E0E0"
         android:id="@+id/image_holder"/>
