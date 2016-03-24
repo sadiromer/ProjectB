@@ -63,23 +63,18 @@ public class GenerateImageActivity extends AppCompatActivity {
                 Uri selectedImage = data.getData(); //path of the image file chosen
                 imageStream = getContentResolver().openInputStream(selectedImage); //streams in the image
                 Bitmap bmpImage = BitmapFactory.decodeStream(imageStream); //converts the image to bitmap
-                //((ImageView)findViewById(R.id.image_holder)).setImageBitmap(Bitmap.createScaledBitmap(original,
-                //original.getWidth() / HALF, original.getHeight() / HALF, true));
 
                 //adding me code to convert to base64
                 String Base64 = encodeTobase64(bmpImage);
 
                 //Splitting the base64 strings into parts
                 int splitStringLength = 1000; //Number of parts base64 is to be split
-                //String Base64Parts[] = splitInParts(Base64, splitStringLength); //Splitting it into parts
                 ArrayList<String> Base64Parts = splitEqually(Base64, splitStringLength);
 
                 //Set it in textview
                 TextView displayView = (TextView) findViewById(R.id.base64text);
                 displayView.setMovementMethod(new ScrollingMovementMethod());
-                //displayView.setText(String.valueOf(Base64Parts.get(1)));
                 displayView.setText(String.valueOf(Base64));
-
 
                 //Getting the length of the string and displaying it
                 int length = Base64.length();
@@ -95,13 +90,15 @@ public class GenerateImageActivity extends AppCompatActivity {
                 displayView3.setText(String.valueOf(numberOfPartsSplit));
 
 
-                //Generate QR code
+                //-------------------Generating a QR Code-------------------------------------------
 
                 //Declaring QR code generator
                 QRCodeWriter writer = new QRCodeWriter();
 
                 //Declaring Array
                 ArrayList<Bitmap> bmp_images = new ArrayList<Bitmap>();
+
+                //For loop for generating multiple QR codes
                 for (int i = 0; i < numberOfPartsSplit; i++) {
                     try {
                         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
@@ -125,12 +122,10 @@ public class GenerateImageActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }//forloop
-
-                //Generate ImageView of the QR code image generated
-               // ((ImageView) findViewById(R.id.image_holder)).setImageBitmap(bmp_images.get(3));
+                //----------------------------------------------------------------------------------
 
 
-                //Generating a GIF file-------------------------------------------------------------
+                //-------------------Generating a GIF file------------------------------------------
                 ByteArrayOutputStream byteOutStreamGIF = new ByteArrayOutputStream();
                 AnimatedGifEncoder encoderGIF = new AnimatedGifEncoder();
                 encoderGIF.start(byteOutStreamGIF);
@@ -159,14 +154,14 @@ public class GenerateImageActivity extends AppCompatActivity {
                 //----------------------------------------------------------------------------------
 
 
-                //Generating GIF Animation----------------------------------------------------------
+                //-------------------Generating GIF Animation---------------------------------------
                 AnimationDrawable animDrawable = new AnimationDrawable();
                 Drawable startFrame = (BitmapDrawable)getResources().getDrawable(R.drawable.start_frame);
-                animDrawable.addFrame(startFrame, 250);
+                animDrawable.addFrame(startFrame, 800);
 
                 for (int k = 0; k < numberOfPartsSplit; k++) {
                     Drawable frame = new BitmapDrawable(bmp_images.get(k));
-                    animDrawable.addFrame(frame, 250);
+                    animDrawable.addFrame(frame, 800);
                 }
 
 

@@ -10,23 +10,17 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Decode"
-        android:id="@+id/buttonDecode" />
+        android:text="Intent"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/buttonDecodeIntent"
+        android:onClick="buttonDecodeIntent"/>
 
-    <ImageView
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="300sp"
-        android:layout_gravity="center_horizontal"
-        android:background="#E0E0E0"
-        android:id="@+id/imageDecoded" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Decoded data:"/>
+        android:text="Continuous"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/buttonDecodeContinuous"
+        android:onClick="buttonDecodeContinuous"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/base64data" />
 </LinearLayout>
