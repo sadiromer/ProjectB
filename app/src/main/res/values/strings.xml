@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ProjectB</string>
+
+    <string-array name="errorCorrectionMethod">
+        <item>  L  </item>
+        <item>  M  </item>
+        <item>  Q  </item>
+        <item>  H  </item>
+    </string-array>
 </resources>

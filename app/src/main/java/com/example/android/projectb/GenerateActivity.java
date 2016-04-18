@@ -36,4 +36,9 @@ public class GenerateActivity extends AppCompatActivity {
         startActivity(intent2);
     }
 
+    public void TextDecodeButton (View v) {
+        Intent intent4 = new Intent(GenerateActivity.this, GenerateTextActivity.class);
+        startActivity(intent4);
+    }
+
 } //GenerateActivity

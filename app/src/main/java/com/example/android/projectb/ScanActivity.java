@@ -30,4 +30,7 @@ public class ScanActivity extends AppCompatActivity {
         Intent intent2 = new Intent(ScanActivity.this, ScanContinousActivity.class);
         startActivity(intent2);
     }
+
+
+
 }

@@ -5,9 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,6 +13,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,11 +37,15 @@ public class GenerateImageActivity extends AppCompatActivity {
     //Define Variables
     private static final int REQUEST_ID = 1;
     private static final int HALF = 2;
+    public int number = 0;
+    public EditText picture;
+    public ArrayList<Bitmap> bmp_images = new ArrayList<Bitmap>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_image);
+        picture = (EditText) findViewById(R.id.pictureNumber);
     }
 
     //Using this to search only for Image Types
@@ -75,12 +77,13 @@ public class GenerateImageActivity extends AppCompatActivity {
                 TextView displayView = (TextView) findViewById(R.id.base64text);
                 displayView.setMovementMethod(new ScrollingMovementMethod());
                 displayView.setText(String.valueOf(Base64));
+                displayView.setTextIsSelectable(true);
 
                 //Getting the length of the string and displaying it
                 int length = Base64.length();
 
                 //Total number of parts being split into
-                int numberOfPartsSplit = (length / splitStringLength);
+                int numberOfPartsSplit = (length / splitStringLength) + 1;
 
                 //int length = Base64Parts[1].length();
                 TextView displayView2 = (TextView) findViewById(R.id.base64details);
@@ -95,11 +98,14 @@ public class GenerateImageActivity extends AppCompatActivity {
                 //Declaring QR code generator
                 QRCodeWriter writer = new QRCodeWriter();
 
+                /*
                 //Declaring Array
                 ArrayList<Bitmap> bmp_images = new ArrayList<Bitmap>();
+                */
+
 
                 //For loop for generating multiple QR codes
-                for (int i = 0; i < numberOfPartsSplit; i++) {
+                for (int i = 0; i <= numberOfPartsSplit; i++) {
                     try {
                         Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
                         hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
@@ -154,14 +160,15 @@ public class GenerateImageActivity extends AppCompatActivity {
                 //----------------------------------------------------------------------------------
 
 
+                /*
                 //-------------------Generating GIF Animation---------------------------------------
                 AnimationDrawable animDrawable = new AnimationDrawable();
                 Drawable startFrame = (BitmapDrawable)getResources().getDrawable(R.drawable.start_frame);
-                animDrawable.addFrame(startFrame, 800);
+                animDrawable.addFrame(startFrame, 1600);
 
                 for (int k = 0; k < numberOfPartsSplit; k++) {
                     Drawable frame = new BitmapDrawable(bmp_images.get(k));
-                    animDrawable.addFrame(frame, 800);
+                    animDrawable.addFrame(frame, 1600);
                 }
 
 
@@ -169,6 +176,7 @@ public class GenerateImageActivity extends AppCompatActivity {
                 imageAnim.setBackgroundDrawable(animDrawable);
                 animDrawable.start();
                 //----------------------------------------------------------------------------------
+                */
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -185,6 +193,17 @@ public class GenerateImageActivity extends AppCompatActivity {
         }//if as requested from button
     }//onActivityResult
 
+    //-------------------Generating Scroll Image----------------------------------------
+
+    public void okButton (View view){
+        number = Integer.parseInt(picture.getText().toString());
+        Bitmap image = bmp_images.get(number);
+
+        ImageView imageAnim = (ImageView) findViewById(R.id.image_holder);
+        imageAnim.setImageBitmap(image);
+    }
+    //----------------------------------------------------------------------------------
+
 
     //___________________________________FUNCTIONS USED_____________________________________________
 
@@ -198,13 +217,6 @@ public class GenerateImageActivity extends AppCompatActivity {
 
         Log.e("LOOK", imageEncoded);
         return imageEncoded;
-    }
-
-
-    //The following is to decode. CAn use it in the decoding part
-    public static Bitmap decodeBase64(String input) {
-        byte[] decodedByte = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
 

@@ -6,4 +6,33 @@
     android:orientation="vertical"
     tools:context="com.example.android.projectb.ScanContinousActivity">
 
+    <Button
+        android:id="@+id/recordButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="startRecording"
+        android:text="Record Video: Camera" />
+
+    <Button
+        android:id="@+id/recordButtonSurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="recordButtonSurfaceView"
+        android:text="Record Video: SurfaceView" />
+
+    <Button
+        android:id="@+id/extractButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="startExtracting"
+        android:text="Extract Video" />
+
+
+
 </LinearLayout>

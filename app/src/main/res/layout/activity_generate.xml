@@ -16,6 +16,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Text"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/TextDecodeButton"
+        android:onClick="TextDecodeButton"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Image"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/ImageDecodeButton"
