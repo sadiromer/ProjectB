@@ -80,6 +80,10 @@ public class ScanContinousActivity extends AppCompatActivity {
         }
     }
 
+
+
+    //Used to extract frames at a particular time interval
+
     public void startExtracting(View view) throws IOException {
         File videoFile=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/Capture/","myvideo.mp4");
 
@@ -103,13 +107,7 @@ public class ScanContinousActivity extends AppCompatActivity {
         saveFrames(rev);
     }
 
-
-
-
-
-
-
-
+    //Save that extracted frames to the sd card
 
     public void saveFrames(ArrayList<Bitmap> saveBitmapList) throws IOException {
 
@@ -140,6 +138,9 @@ public class ScanContinousActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Frames Generated", Toast.LENGTH_LONG).show();
 
     }
+    //--------------------------------------------------------------------------------------
+
+    //Go to surfaceview
 
     public void recordButtonSurfaceView (View view){
         Intent intent2 = new Intent(ScanContinousActivity.this, ScanCameraAcivity.class);

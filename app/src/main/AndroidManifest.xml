@@ -9,7 +9,6 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -31,7 +30,8 @@
         <activity android:name=".ScanIntentActivity" />
         <activity android:name=".ScanContinousActivity" />
         <activity android:name=".GenerateTextActivity" />
-        <activity android:name=".ScanCameraAcivity"></activity>
+        <activity android:name=".ScanCameraAcivity" />
+        <activity android:name=".CameraRecordActivity"></activity>
     </application>
 
 </manifest>

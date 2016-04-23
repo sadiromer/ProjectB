@@ -26,5 +26,6 @@ dependencies {
     compile project(':core-3.2.1')
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     compile project(':universal-image-loader-1.9.5')
+    compile project(':openCVLibrary310')
 }
 

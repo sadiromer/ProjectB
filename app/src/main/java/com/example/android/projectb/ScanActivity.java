@@ -32,5 +32,9 @@ public class ScanActivity extends AppCompatActivity {
     }
 
 
+    public void buttonRecord (View v) {
+        Intent intent3 = new Intent(ScanActivity.this, CameraRecordActivity.class);
+        startActivity(intent3);
+    }
 
 }

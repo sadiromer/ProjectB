@@ -16,11 +16,19 @@
         android:onClick="buttonDecodeIntent"/>
 
     <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Continuous"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:id="@+id/buttonDecodeContinuous"
+    android:onClick="buttonDecodeContinuous"/>
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continuous"
+        android:text="Record"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/buttonDecodeContinuous"
-        android:onClick="buttonDecodeContinuous"/>
+        android:id="@+id/buttonRecord"
+        android:onClick="buttonRecord"/>
 
 </LinearLayout>
