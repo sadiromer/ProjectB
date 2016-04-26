@@ -26,9 +26,19 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Record"
+        android:text="Record: OpenCV"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/buttonRecord"
         android:onClick="buttonRecord"/>
+
+    <Button
+        android:id="@+id/recordButtonSurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="recordButtonSurfaceView"
+        android:text="Record Video: SurfaceView" />
 
 </LinearLayout>

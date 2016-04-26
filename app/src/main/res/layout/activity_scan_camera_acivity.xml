@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:onClick="capture"
+            android:onClick="Capture"
             android:text="Capture" />
         <Button
             android:id="@+id/Start"

@@ -37,4 +37,13 @@ public class ScanActivity extends AppCompatActivity {
         startActivity(intent3);
     }
 
+    //--------------------------------------------------------------------------------------
+
+    //Go to surfaceview
+
+    public void recordButtonSurfaceView (View view){
+        Intent intent2 = new Intent(ScanActivity.this, ScanCameraAcivity.class);
+        startActivity(intent2);
+    }
+
 }

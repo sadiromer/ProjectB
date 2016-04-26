@@ -2,7 +2,6 @@ package com.example.android.projectb;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.SurfaceView;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -11,6 +10,9 @@ import org.opencv.android.JavaCameraView;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 
 public class CameraRecordActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
@@ -21,7 +23,7 @@ public class CameraRecordActivity extends Activity implements CameraBridgeViewBa
             switch(status){
                 case LoaderCallbackInterface.SUCCESS:
                 {
-                  Log.i("TAG", "OpenCV loaded successfully");
+                  //Log.d("TAG", "OpenCV loaded successfully");
                     mOpenCvCameraView.enableView();
                     break;
                 }
@@ -86,6 +88,9 @@ public class CameraRecordActivity extends Activity implements CameraBridgeViewBa
      */
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        return inputFrame.rgba();
+        Mat mRgba = inputFrame.rgba();
+
+        Imgproc.rectangle(mRgba,new Point(0,0),new Point (100,100), new Scalar(0,0,255),4);
+        return mRgba;
     }
 }

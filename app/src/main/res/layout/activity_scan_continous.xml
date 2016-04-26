@@ -6,32 +6,83 @@
     android:orientation="vertical"
     tools:context="com.example.android.projectb.ScanContinousActivity">
 
-    <Button
-        android:id="@+id/recordButton"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="startRecording"
-        android:text="Record Video: Camera" />
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/recordButtonSurfaceView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="recordButtonSurfaceView"
-        android:text="Record Video: SurfaceView" />
+        <Button
+            android:id="@+id/recordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="startRecording"
+            android:layout_weight="1"
+            android:text="Record Video: Camera" />
 
-    <Button
-        android:id="@+id/extractButton"
-        android:layout_width="match_parent"
+
+        <Button
+            android:id="@+id/extractButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="startExtracting"
+            android:layout_weight="2"
+            android:text="Extract Video" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#E0E0E0"
+        android:id="@+id/imageDecoded" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="startExtracting"
-        android:text="Extract Video" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff0000ff"
+            android:text="Number of QR codes scanned: "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/numberOfQrCodesScanned" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ff0000ff"
+            android:text="Length of Text: "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/lengthOfText" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ff0000ff"
+        android:text="Decoded data:"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/decodeData" />
 
 
 

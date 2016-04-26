@@ -20,53 +20,58 @@
         android:onClick="browseButton"/>
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="250sp"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
+        android:padding="0px"
         android:layout_gravity="center_horizontal"
         android:background="#E0E0E0"
         android:id="@+id/image_holder"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Length of the converted String: "
+            android:textColor="#ff0000ff"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/base64details" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Number of Parts split into: "
+            android:textColor="#ff0000ff"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/base64details2" />
+    </LinearLayout>
+
+
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Length of the converted String:"/>
+        android:text="Code converted to base64: "
+        android:textColor="#ff0000ff"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/base64details" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Code converted to base64 1: "/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="35sp"
         android:id="@+id/base64text" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Code converted to base64 2: "/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="35sp"
-        android:id="@+id/base64text2" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Code converted to base64 3: "/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="35sp"
-        android:id="@+id/base64text3" />
-
-
-
 
 </LinearLayout>
